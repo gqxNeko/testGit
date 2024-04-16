@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/view-design/dist/styles/iview.css" />
+    <script type="text/javascript" src="http://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/view-design/dist/iview.min.js"></script>
+    <div id="app">
+      <i-form>
+        <i-table :columns="tableColumn" :data="formValue.tableData">
+          <template slot-scope="{row,index}" slot="count">
+            <i-form :model="row" :rules="formValidate">
+              <form-item
+                :prop="`count`"
+                :rules="formValidate.count">
+                <input-number v-model="row.count" />
+              </form-item>
+            </i-form>
+
+            <!-- <span>{{row.count}}</span> -->
+          </template>
+        </i-table>
+      </i-form>
+    </div>
+
+    <script>
+      let app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            tableColumn: [
+              {
+                key: 'count',
+                title: '数量',
+                slot: 'count'
+              }
+            ],
+            tableData: [
+              {
+                count: 2
+              }
+            ],
+
+            formValue: {
+              tableData: [
+                {
+                  count: 2
+                }
+              ]
+            },
+            formValidate: {
+              count: [
+                {
+                  required: true,
+                  type: 'number',
+                  message: '请输入数字',
+                  trigger: 'blur'
+                }
+              ]
+            }
+          }
+        },
+        mounted() {},
+        methods: {}
+      })
+    </script>
+  </body>
+</html>
